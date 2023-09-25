@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -19,18 +18,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.flags.ui.theme.FlagsTheme
+import com.example.flags.models.Country
+
 
 
 @Composable
 fun CountryItem(
-    countryName: String,
-    countryCode: String,
-    countryDescription : String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    country : Country
 ) {
     var shouldExpand by rememberSaveable { mutableStateOf(true) }
 
@@ -41,7 +38,7 @@ fun CountryItem(
                 Image(
                     painter = painterResource(
                         id = LocalContext.current.resources.getIdentifier(
-                            countryCode,
+                            country.countryCode,
                             "drawable",
                             LocalContext.current.packageName
                         )
@@ -55,10 +52,10 @@ fun CountryItem(
                         .weight(1.0f)
                 ) {
                     Text(
-                        text = countryName,
+                        text = country.countryName,
                         style = TextStyle(fontWeight = FontWeight.Bold)
                     )
-                    Text(text = countryCode.uppercase())
+                    Text(text = country.countryCode.uppercase())
                 }
                 OutlinedButton(onClick = {
                     shouldExpand = !shouldExpand
@@ -72,8 +69,9 @@ fun CountryItem(
             }
                 if(shouldExpand) {
                     Text(
+                        modifier = Modifier.padding(4.dp),
                         style = TextStyle(textAlign = TextAlign.Justify),
-                        text = countryDescription
+                        text = country.countryDescription
                     )
             }
         }
@@ -82,5 +80,5 @@ fun CountryItem(
 @Preview(showBackground = true)
 @Composable
 fun CountryItemPreview() {
-    CountryItem("France", "fra")
+    CountryItem(country = Country ("France", "fra"))
 }
