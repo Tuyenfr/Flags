@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.flags"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.flags"
         minSdk = 22
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -47,6 +47,9 @@ android {
 }
 
 dependencies {
+
+    implementation("androidx.navigation:navigation-compose:2.7.3")
+    implementation("com.google.code.gson:gson:2.9.1")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
